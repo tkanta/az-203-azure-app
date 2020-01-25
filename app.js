@@ -32,9 +32,9 @@ app.use(function(req, res, next) {
   next(createError(404));
 });
 
-app.use('/problem', function(){
-  throw new Error('Something is wrong!')
-})
+// app.use('/problem', function(){
+//   throw new Error('Something is wrong!')
+// })
 
 // error handler
 app.use(function(err, req, res, next) {

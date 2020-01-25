@@ -14,4 +14,8 @@ router.get('/', function(req, res, next) {
      res.render('index', model);
 });
 
+router.get('/problem', function(){
+  throw new Error('Something is wrong!')
+});
+
 module.exports = router;
