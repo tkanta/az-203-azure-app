@@ -9,7 +9,7 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
     var model = {
       title: 'Azure',
-      message: process.env.MESSAGE || 'This is development'
+      message: process.env.MESSAGE || 'This is default environment'
     };
      res.render('index', model);
 });
