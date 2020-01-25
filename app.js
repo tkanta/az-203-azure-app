@@ -9,6 +9,11 @@ var usersRouter = require('./routes/users');
 
 var app = express();
 
+//Application Insights
+var appInsights = require('applicationinsights')
+appInsights.setup('c15c09cb-aeaf-4c9a-ab6a-00c1d1a1a5d8')
+appInsights.start()
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -27,11 +32,17 @@ app.use(function(req, res, next) {
   next(createError(404));
 });
 
+app.use('/problem', function(){
+  throw new Error('Something is wrong!')
+})
+
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+  appInsights.defaultClient.trackException({exception: err})
 
   // render the error page
   res.status(err.status || 500);
